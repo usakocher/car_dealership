@@ -1,0 +1,153 @@
+CREATE TABLE customer (
+	customer_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	address VARCHAR(100),
+	email VARCHAR(50),
+	contact_number VARCHAR(20),
+	billing_info VARCHAR(23)
+);
+
+CREATE TABLE car(
+	car_id SERIAL PRIMARY KEY,
+	manf_year NUMERIC(4),
+	make VARCHAR(20),
+	model VARCHAR(20),
+	color VARCHAR(20),
+	is_new BOOLEAN,
+	previous_owner INTEGER,
+	mileage NUMERIC(7,1),
+	in_stock BOOLEAN,
+	price NUMERIC(8,2)
+);
+
+CREATE TABLE salesperson(
+	salesperson_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	email VARCHAR(50),
+	contact_number VARCHAR(20)
+);
+
+CREATE TABLE mechanic(
+	mechanic_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	email VARCHAR(50),
+	contact_number VARCHAR(20)
+);
+
+CREATE TABLE parts(
+	part_id SERIAL PRIMARY KEY,
+	part_name VARCHAR(25),
+	brand VARCHAR(25),
+	supplier VARCHAR(50),
+	stock INTEGER,
+	inv_location VARCHAR(10),
+	part_cost NUMERIC(6,2)
+);
+
+CREATE TABLE invoice(
+	invoice_id SERIAL PRIMARY KEY,
+	customer_id INTEGER,
+	car_id INTEGER,
+	salesperson_id INTEGER,
+	final_price NUMERIC(8,2),
+	invoice_date TIMESTAMP DEFAULT NOW()::timestamp,
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+	FOREIGN KEY(car_id) REFERENCES car(car_id),
+	FOREIGN KEY(salesperson_id) REFERENCES salesperson(salesperson_id)
+);
+
+CREATE TABLE serviceTicket(
+	service_id SERIAL PRIMARY KEY,
+	car_id INTEGER,
+	customer_id INTEGER,
+	mechanic_id INTEGER,
+	part_id INTEGER,
+	price NUMERIC(7,2),
+	description VARCHAR(100),
+	repair_date TIMESTAMP DEFAULT NOW()::timestamp,
+	FOREIGN KEY(car_id) REFERENCES car(car_id),
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+	FOREIGN KEY(mechanic_id) REFERENCES mechanic(mechanic_id),
+	FOREIGN KEY(part_id) REFERENCES parts(part_id)
+);
+
+CREATE OR REPLACE FUNCTION add_customer(_first_name VARCHAR, _last_name VARCHAR, _address VARCHAR, _email VARCHAR, _contact_number VARCHAR, _billing_info VARCHAR)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO customer(first_name, last_name, address, email, contact_number, billing_info)
+	VALUES(_first_name, _last_name, _address, _email, _contact_number, _billing_info);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION add_car(_manf_year NUMERIC, _make VARCHAR, _model VARCHAR, _color VARCHAR, _is_new BOOLEAN, _previous_owner INTEGER, _mileage NUMERIC,
+	_in_stock BOOLEAN, _price NUMERIC)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO car(manf_year, make, model, color, is_new, previous_owner, mileage, in_stock, price)
+	VALUES(_manf_year, _make, _model, _color, _is_new, _previous_owner, _mileage, _in_stock, _price);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION add_salesperson(_first_name VARCHAR, _last_name VARCHAR, _email VARCHAR, _contact_number VARCHAR)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO salesperson(first_name, last_name, email, contact_number)
+	VALUES(_first_name, _last_name, _email, _contact_number);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION add_mechanic(_first_name VARCHAR, _last_name VARCHAR, _email VARCHAR, _contact_number VARCHAR)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO mechanic(first_name, last_name, email, contact_number)
+	VALUES(_first_name, _last_name, _email, _contact_number);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION add_parts(_part_name VARCHAR, _brand VARCHAR, _supplier VARCHAR, _stock INTEGER, _inv_location VARCHAR, _part_cost NUMERIC)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO parts(part_name, brand, supplier, stock, inv_location, part_cost)
+	VALUES(_part_name, _brand, _supplier, _stock, _inv_location, _part_cost);
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION add_invoice(_customer_id INTEGER, _car_id INTEGER, _salesperson_id INTEGER, _final_price INTEGER)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO invoice(customer_id, car_id, salesperson_id, final_price)
+	VALUES(_customer_id, _car_id, _salesperson_id, _final_price);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION add_serviceticket(_car_id INTEGER, _customer_id INTEGER, _mechanic_id INTEGER, _part_id INTEGER, _price INTEGER, _description VARCHAR)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO serviceticket(car_id, customer_id, mechanic_id, part_id, price, description)
+	VALUES(_car_id, _customer_id, _mechanic_id, _part_id, _price, _description);
+END;
+$$;
+
+
+
+
+
+

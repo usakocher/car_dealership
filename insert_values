@@ -1,0 +1,48 @@
+-- Adding customers with the stored function
+SELECT add_customer('John', 'Hammersmith', '514 Appleseed Rd', 'jhammersmith@coldmail.com', '15135556184', '12341234123412340623551');
+SELECT add_customer('Chad', 'Ochocinco', '8585 Stripes Circle', '85dagreatest@coldmail.com', '15135558585', '85858585858585855385851');
+SELECT add_customer('Paul', 'Scholes', '18 Ginger Lane', 'upper90@coldmail.com', '12025551818', '43214321432143211885201');
+SELECT add_customer('Leslie', 'Knope', '18 Punxsutawney Way', 'planttrees@coldmail.com', '15745551234', '74185296374185296374185');
+SELECT add_customer('Uhtred', 'Ragnarsson', '7 Hatch Place', 'destinyisall@coldmail.com', '18105552341', '4196374456741096435');
+
+-- Adding cars with the stored function
+SELECT add_car(2017, 'Chevy', 'Tahoe', 'Black', False, 2, 31541.7, False, 38514.99);
+SELECT add_car(2021, 'Chevy', 'Malibu', 'Cherry Red', True, 0, 11.1, True, 24690);
+SELECT add_car(2021, 'Chevy', 'Equinox', 'Electric Blue', True, 0, 27.2, True, 27230);
+SELECT add_car(2021, 'Chevy', 'Malibu', 'White', True, 0, 1, True, 22270);
+SELECT add_car(2019, 'Chevy', 'Camaro', 'Crush', False, 1, 8401.5, False, 46545);
+
+-- Adding salespeople with the stored function
+SELECT add_salesperson('Don', 'Ready', 'thegoods@dealership.com', '13055556497');
+SELECT add_salesperson('Jibby', 'Newsome', 'bigdog@dealership.com', '13055556498');
+SELECT add_salesperson('Ben', 'Selleck', 'mustache@dealership.com', '13055556499');
+SELECT add_salesperson('Brent', 'Gage', 'thechamp@dealership.com', '13055556496');
+SELECT add_salesperson('Babs', 'Merrick', 'mssaturdaynight@dealership.com', '13056495');
+
+-- Adding mechanics with the stored function
+SELECT add_mechanic('Alex', 'Reiger', 'independenceday@dealership.com', '13055556487');
+SELECT add_mechanic('Louie', 'De Palma', 'shortie@dealership.com', '13055556498');
+SELECT add_mechanic('Tony', 'Banta', 'whosincharge@dealership.com', '13055556499');
+SELECT add_mechanic('Latka', 'Gravas', 'livingweirdo@dealership.com', '13055556496');
+SELECT add_mechanic('Iggy', 'Ignatowski', '88milesperhour@dealership.com', '13055556495');
+
+-- Adding parts with the stored function
+SELECT add_parts('Transmission', 'MOPAR', 'Virginia Car Parts', 4, 'A122', 1500);
+SELECT add_parts('Air Filter', 'Breathe Right', 'Jiffy Lube', 25, 'C15', 4.99);
+SELECT add_parts('M8 Screws', 'Libby', 'Fastenal', 1050, 'D9', .04);
+SELECT add_parts('M12 Screws', 'Libby', 'Fastenal', 945, 'D11', .05);
+SELECT add_parts('Brake Pads', 'Duralast', 'Duralast', 20, 'B45', 29.99);
+
+-- Adding invoices with the stored function
+SELECT add_invoice(1, 2, 3, 29546);
+SELECT add_invoice(2, 3, 1, 23599);
+SELECT add_invoice(3, 5, 1, 23147);
+SELECT add_invoice(3, 6, 4, 51554);
+SELECT add_invoice(5, 4, 2, 31294);
+
+-- Adding service tickets with the stored function
+SELECT add_serviceticket(3, 2, 2, NULL, 20, 'Initial Inspection');
+SELECT add_serviceticket(6, 4, 3, 1, 2500, 'Changed out transmission');
+SELECT add_serviceticket(4, 5, 4, 2, 30, 'Oil Change');
+SELECT add_serviceticket(3, 2, 5, 5, 350, 'Changed out brake pads on all 4 wheels');
+SELECT add_serviceticket(2, 1, 1, NULL, 20, 'Initial Inspection');
